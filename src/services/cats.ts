@@ -1,9 +1,7 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { IBreed } from "types";
 
-// Define a service using a base URL and expected endpoints
 export const catsApi = createApi({
   reducerPath: "catsApi",
   baseQuery: fetchBaseQuery({
@@ -15,7 +13,6 @@ export const catsApi = createApi({
         "access-control-allow-headers",
         "Origin, X-Requested-With, Content-Type, Accept"
       );
-      // access-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept
       headers.set("Content-Type", "application/json; charset=utf-8");
       return headers;
     },
@@ -27,6 +24,4 @@ export const catsApi = createApi({
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const { useGetBreedsQuery } = catsApi;
