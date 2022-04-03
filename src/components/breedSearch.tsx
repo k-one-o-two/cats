@@ -13,7 +13,7 @@ const BreedSearch = () => {
 
   return (
     <input
-      placeholder="search for breed"
+      placeholder="search by breed name"
       className="form-control"
       onChange={onChange}
       type="text"

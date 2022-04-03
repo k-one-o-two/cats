@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useMemo } from "react";
 import { useGetBreedsQuery } from "../services/cats";
 import Breed from "./breed";
 import Loader from "../atoms/loader";
@@ -28,6 +28,22 @@ const Breeds = () => {
 
     return 0;
   };
+
+  const mostAndLeastIntelligentBreeds = useMemo(() => {
+    if (!data) {
+      return null;
+    }
+    const sorted = [...data].sort((breedA, breedB) =>
+      sortPredicate(breedA, breedB, "intellinegce")
+    );
+
+    return {
+      most: `Most Intelligent cat breed is "${sorted[0].name}", with intelligence of ${sorted[0].intelligence}`,
+      least: `Least  Intelligent cat breed is "${
+        sorted[sorted.length - 1].name
+      }", with intelligence of ${sorted[sorted.length - 1].intelligence}`,
+    };
+  }, [data]);
 
   useEffect(() => {
     setBreedList(
@@ -78,6 +94,8 @@ const Breeds = () => {
 
   return data ? (
     <div className="container">
+      <span className="d-block">{mostAndLeastIntelligentBreeds?.most}</span>
+      <span className="d-block">{mostAndLeastIntelligentBreeds?.least}</span>
       {Array.from({ length: ROWS }, (_, i: number) => i).map((index: number) =>
         gridRow(index)
       )}

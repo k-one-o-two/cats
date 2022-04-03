@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   return (
     <>
+      <h2 className="text-center">Cat breeds</h2>
       <div className="mb-3 p-3">
         <BreedsSort />
         <BreedSearch />
